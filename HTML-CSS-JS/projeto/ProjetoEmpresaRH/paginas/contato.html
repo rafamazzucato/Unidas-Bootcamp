@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../css/main.css" rel="stylesheet" />
     <link href="../css/form.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
             <p>Sinta-se à vontade para entrar em contato</p>
         </header>
 
-        <form id="formulario" action="contatoOK.html" method="post">
+        <form id="formularioContato" action="contatoOK.html" method="post">
             <div class="linha">
                 <label class="coluna col-2" for="nome">Seu nome:</label>
                 <div class="col-10">
@@ -50,11 +51,11 @@
                 </div>
             </div>
 
-            <div class="linha">
-                <input type="submit" value="Enviar" id="enviarContato" />
-            </div>
+            <input type="submit" value="Enviar" class="enviar" />
         </form>
     </div>
+
+    <script src="../scripts/validacao-contato.js"></script>
 </body>
 
 </html>
