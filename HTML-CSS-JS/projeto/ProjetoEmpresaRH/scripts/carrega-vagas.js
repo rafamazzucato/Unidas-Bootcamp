@@ -1,59 +1,59 @@
 const vagas = [
     {
-        "id":"1",
+        "id": "1",
         "titulo": "Programador Java Pleno",
-        "tipo":"1"
+        "tipo": "1"
     },
     {
-        "id":"2",
+        "id": "2",
         "titulo": "Analista Comercial",
-        "tipo":"2"
+        "tipo": "2"
     },
     {
-        "id":"3",
+        "id": "3",
         "titulo": "Instrutor Excel Avançado",
-        "tipo":"1"
+        "tipo": "1"
     },
     {
-        "id":"4",
+        "id": "4",
         "titulo": "Gerente de Projetos para .Net",
-        "tipo":"2"
+        "tipo": "2"
     },
     {
-        "id":"5",
+        "id": "5",
         "titulo": "Consultor de Desenvolvimento Ágil",
-        "tipo":"2"
+        "tipo": "2"
     },
     {
-        "id":"6",
+        "id": "6",
         "titulo": "Programador VB.Net",
-        "tipo":"1"
-    },
-]
+        "tipo": "1"
+    }
+];
 
-const limpar = function(){
-    const selectVagas = $('#vaga')
+const limpar = function () {
+    const selectVagas = $('#vaga');
 
-    selectVagas.empty()
+    selectVagas.empty();
 
-    const def = document.createElement('option')
-    def.textContent = 'Selecione a vaga desejava'
-    def.setAttribute('value', -1)
-    selectVagas.append(def)
-}
+    const def = document.createElement('option');
+    def.textContent = 'Selecione a vaga desejava';
+    def.setAttribute('value', -1);
+    selectVagas.append(def);
+};
 
-$('input[name=tipo]').click(function(){
-    const selectVagas = $('#vaga')
+$('input[name=tipo]').click(function () {
+    const selectVagas = $('#vaga');
 
-    limpar()
-    for(let i = 0; i< vagas.length; i++){
-        const item = vagas[i]
-        if(item.tipo == this.value){
-            const option = document.createElement('option')
-            option.textContent = item.titulo
-            option.setAttribute('value', item.id)
+    limpar();
+    for (let i = 0; i < vagas.length; i++) {
+        const vaga = vagas[i];
+        if (vaga.tipo === this.value) {
+            const option = document.createElement('option');
+            option.textContent = vaga.titulo;
+            option.setAttribute('value', vaga.id);
 
-            selectVagas.append(option)
+            selectVagas.append(option);
         }
     }
-})
+});
