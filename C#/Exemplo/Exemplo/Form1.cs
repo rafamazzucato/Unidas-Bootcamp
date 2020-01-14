@@ -39,25 +39,30 @@ namespace Exemplo
         */
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
-
-            string[] diasDaSemana = { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" };
-
-            foreach (var diaSelecionado in diasDaSemana)
+            string resultado = "";
+            try
             {
-                Class1 teste = new Class1();
-
-                teste.Teste = "Rafael";
-                teste.Teste2 = "Thomazelli";
-
-                teste.Adicionar("Valor");
-
-
-                if (EstadoCivil.CASADO == EstadoCivil.SOLTEIRO)
-                {
-
-                }
                 
+                int n1 = 10, n2 = 5;
+
+                if(n2 == 0)
+                {
+                    throw new FormDivisaoZeroException("Não é possível dividir por zero");
+                }
+
+                int conta = n1 / n2;
+
+                Console.WriteLine($"Resultado = {conta}");
+                resultado = $"Resultado = {conta}";
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Não é possível dividir por zero");
+                resultado = "Não é possível dividir por zero";
+            }
+            finally
+            {
+                MessageBox.Show(resultado);
             }
         }
     }
