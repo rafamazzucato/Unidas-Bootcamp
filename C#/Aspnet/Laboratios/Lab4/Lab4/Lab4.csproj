@@ -86,13 +86,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Estilos.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\WebApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.cshtml" />
+    <Content Include="ComentarioForm.cshtml" />
+    <Content Include="ComentarioProcessar.cshtml" />
+    <Content Include="ComentarioLista.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
