@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Formulário";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<div class="container">
+    <section class="row">
+        <form action="/Home/Salvar" method="post">
+            <label for="Login">Digite o Nome:</label>
+            <input id="Login" name="Login" type="text" value="" />
+            <label for="Senha">Senha:</label>
+            <input id="Senha" name="Senha" type="password" />
+            <label for="ManterLogado">Lembrar Nome e Senha</label>
+            <input checked="checked" id="ManterLogado" name="ManterLogado" type="checkbox"
+                   value="true" />
+            <input name="ManterLogado" type="hidden" value="false" />
+            <input type="submit" value="Enviar" />
+        </form>
+    </section>
+</div>

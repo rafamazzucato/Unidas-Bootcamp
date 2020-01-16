@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Contato";
+}
+
+@model SitePessoal.Models.Contato
+
+<h2>Contato</h2>
+
+@if (ViewBag.Concluido)
+{
+    <p>Obrigado por seu cadastro. Em breve entrarei em contato.</p>
+}
+else
+{
+    <p>Por favor, preencha o formulário para entrar em contato comigo:</p>
+    <hr />
+    <h3 style="color:red;">@ViewBag.ErrorMsg</h3>
+    <form action="/Contato/Salvar" method="post">
+        <div class="form-group">
+            <label for="Name" class="control-label">Nome:</label>
+            <input type="text" id="Name" name="Name"
+                   class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="Mail" class="control-label">Email:</label>
+            <input type="text" id="Mail" name="Mail"
+                   class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="Message" class="control-label">Mensagem:</label>
+            <input type="text" id="Message" name="Message"
+                   ] class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-default"
+                   value="Enviar" />
+        </div>
+    </form>
+}
