@@ -1,6 +1,8 @@
 ﻿using SitePessoal.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,14 +27,31 @@ namespace SitePessoal.Controllers
                        || string.IsNullOrEmpty(contato.Name)
                        || string.IsNullOrEmpty(contato.Message))
                 {
-                    throw new ArgumentException("Favor preencher todo formulário");
+                    throw new ValidationException("Favor preencher todo formulário");
+                }
+
+                var pathVirtual = "~/contatos.txt";
+                var pathFisico = Server.MapPath(pathVirtual);
+
+                using(var sw = new StreamWriter(pathFisico, true))
+                {
+                    sw.Write(contato.Name + ";");
+                    sw.Write(contato.Mail + ";");
+                    sw.Write(contato.Message + ";");
+                    sw.Write(DateTime.Now + ";\n");
                 }
 
                 ViewBag.Concluido = true;
             }
-            catch(Exception ex)
+            catch (ValidationException ve)
             {
-                ViewBag.ErrorMsg = ex.Message;
+                ViewBag.ErrorMsg = ve.Message;
+                ViewBag.Concluido = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                ViewBag.ErrorMsg = "Ocorreu erro ao salvar arquivo, entre em contato com o administrador do sistema.";
                 ViewBag.Concluido = false;
             }
             
