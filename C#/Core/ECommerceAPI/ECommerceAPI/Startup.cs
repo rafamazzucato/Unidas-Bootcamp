@@ -61,6 +61,8 @@ namespace ECommerceAPI
                     ValidateAudience = false
                 };
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +73,7 @@ namespace ECommerceAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(option => option.AllowAnyOrigin()); ;
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseRouting();
@@ -81,6 +84,7 @@ namespace ECommerceAPI
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
