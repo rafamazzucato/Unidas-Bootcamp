@@ -1,5 +1,6 @@
 ﻿using ECommerceAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +36,7 @@ namespace ECommerceAPI.Repository
 
         public List<Produto> ListarTodos()
         {
-            return _context.Produtos.Include(p => p.UsuarioCriador).ToList();
-        }
-
-        public List<Produto> ListarTodosAtivos()
-        {
-            return _context.Produtos.Include(p => p.UsuarioCriador).Where(p => p.Ativo == true).ToList();
+            return SelecionarDadosEspecificos(_context.Produtos.Include(p => p.UsuarioCriador));
         }
 
         public void Remover(int id)
@@ -63,6 +59,25 @@ namespace ECommerceAPI.Repository
         private bool ProdutoExists(int id)
         {
             return _context.Produtos.Any(e => e.Id == id);
+        }
+
+        private List<Produto> SelecionarDadosEspecificos(IQueryable<Produto> query)
+        {
+            return query.Select(r => new Produto()
+            {
+                Ativo = r.Ativo,
+                DataModificacao = r.DataModificacao,
+                Descricao = r.Descricao,
+                Id = r.Id,
+                IdUsuario = r.IdUsuario,
+                Nome = r.Nome,
+                Preco = r.Preco,
+                UsuarioCriador = new Usuario()
+                {
+                    Nome = r.UsuarioCriador.Nome,
+                    Login = r.UsuarioCriador.Login,
+                }
+            }).ToList();
         }
     }
 }

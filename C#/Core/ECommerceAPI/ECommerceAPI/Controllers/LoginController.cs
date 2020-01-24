@@ -17,13 +17,13 @@ namespace ECommerceAPI.Controllers
     {
         private readonly UsuarioRepository _usuarioRepository;
 
-        public LoginController(ECommerceDbContext context)
+        public LoginController(UsuarioRepository usuarioRepository)
         {
-            _usuarioRepository = new UsuarioRepositoryImpl(context);
+            _usuarioRepository = usuarioRepository;
         }
 
         [HttpPost]
-        public async Task<ActionResult<dynamic>> Login([FromBody]Usuario usuario)
+        public ActionResult<dynamic> Login([FromBody]Usuario usuario)
         {
             var user = _usuarioRepository.BuscaPorLoginEmailSenha(usuario.Login, usuario.Email, usuario.Senha);
 
@@ -32,12 +32,16 @@ namespace ECommerceAPI.Controllers
                 return NotFound(new { message = "Usuário ou senha inválidos" });
             }
 
+            if (user.Ativo == false)
+            {
+                return NotFound(new { message = "Usuário inátivo, entre em contato com o administrador" });
+            }
+
             var token = TokenServico.GenerateToken(user);
 
             return new
             {
                 login = user.Login,
-                email = user.Email,
                 token
             };
         }

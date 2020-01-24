@@ -17,12 +17,17 @@ namespace ECommerceAPI.Controllers
         private readonly ProdutoRepository _produtoRepository;
         private readonly PerfilRepository _perfilRepository;
         private readonly UsuarioRepository _usuarioRepository;
+        private readonly EstoqueRepository _estoqueRepository;
 
-        public InitialController(ECommerceDbContext context)
+        public InitialController(PerfilRepository perfilRepository,
+                ProdutoRepository produtoRepository,
+                UsuarioRepository usuarioRepository,
+                EstoqueRepository estoqueRepository)
         {
-            _produtoRepository = new ProdutoRepositoryImpl(context);
-            _perfilRepository = new PerfilRepositoryImpl(context);
-            _usuarioRepository = new UsuarioRepositoryImpl(context);
+            _perfilRepository = perfilRepository;
+            _produtoRepository = produtoRepository;
+            _usuarioRepository = usuarioRepository;
+            _estoqueRepository = estoqueRepository;
         }
 
         [HttpGet]
@@ -48,20 +53,60 @@ namespace ECommerceAPI.Controllers
             var userFinal3 = new Usuario() { IdPerfil = perfilUser.Id, DataModificacao = DateTime.Now, Ativo = false, Nome = "User 3 Inativo", Email = "user3@verzel.com.br", Login = "user3", Senha = "user123" };
             _usuarioRepository.Gravar(userFinal3);
 
-            _produtoRepository.Cadastrar(new Produto() { Nome = "TV Smart 32 4k", Preco = 1000.90m, Ativo = true, Descricao = "TV Smart 4K, 3 USBs, 3HDMI", DataModificacao = DateTime.Now, IdUsuario = userAdmin.Id });
-            _produtoRepository.Cadastrar(new Produto() { Nome = "Microondas LG", Preco = 399.78m, Ativo = true, Descricao = "Microondas LG", DataModificacao = DateTime.Now, IdUsuario = userAdmin2.Id });
-            _produtoRepository.Cadastrar(new Produto() { Nome = "Fogão Brastemp", Preco = 899.99m, Ativo = true, Descricao = "Fogão Brastemp", DataModificacao = DateTime.Now, IdUsuario = userAdmin3.Id });
-            _produtoRepository.Cadastrar(new Produto() { Nome = "Notebook Game Acer", Preco = 3800.00m, Ativo = true, Descricao = "Notebook Game Acer", DataModificacao = DateTime.Now, IdUsuario = userAdmin.Id });
-            _produtoRepository.Cadastrar(new Produto() { Nome = "Geladeira Samsung", Preco = 2850.25m, Ativo = false, Descricao = "Geladeira Samsung", DataModificacao = DateTime.Now, IdUsuario = userAdmin2.Id });
-            _produtoRepository.Cadastrar(new Produto() { Nome = "Liquidificador Philco", Preco = 1000.90m, Ativo = false, Descricao = "Liquidificador Philco", DataModificacao = DateTime.Now, IdUsuario = userAdmin3.Id });
-            _produtoRepository.Cadastrar(new Produto() { Nome = "Cama Box Baú King", Preco = 1500.00m, Ativo = true, Descricao = "Cama Box Baú King", DataModificacao = DateTime.Now, IdUsuario = userAdmin.Id });
-            _produtoRepository.Cadastrar(new Produto() { Nome = "Colchão King", Preco = 2200.89m, Ativo = true, Descricao = "Colchão King", DataModificacao = DateTime.Now, IdUsuario = userAdmin2.Id });
-           
+            var produto1 = new Produto() { Nome = "TV Smart 32 4k", Preco = 1000.90m, Ativo = true, Descricao = "TV Smart 4K, 3 USBs, 3HDMI", DataModificacao = DateTime.Now, IdUsuario = userAdmin.Id };
+            _produtoRepository.Cadastrar(produto1);
+
+            var produto2 = new Produto() { Nome = "Microondas LG", Preco = 399.78m, Ativo = true, Descricao = "Microondas LG", DataModificacao = DateTime.Now, IdUsuario = userAdmin2.Id };
+            _produtoRepository.Cadastrar(produto2);
+
+            var produto3 = new Produto() { Nome = "Fogão Brastemp", Preco = 899.99m, Ativo = true, Descricao = "Fogão Brastemp", DataModificacao = DateTime.Now, IdUsuario = userAdmin3.Id };
+            _produtoRepository.Cadastrar(produto3);
+
+            var produto4 = new Produto() { Nome = "Notebook Game Acer", Preco = 3800.00m, Ativo = true, Descricao = "Notebook Game Acer", DataModificacao = DateTime.Now, IdUsuario = userAdmin.Id };
+            _produtoRepository.Cadastrar(produto4);
+
+            var produto5 = new Produto() { Nome = "Geladeira Samsung", Preco = 2850.25m, Ativo = false, Descricao = "Geladeira Samsung", DataModificacao = DateTime.Now, IdUsuario = userAdmin2.Id };
+            _produtoRepository.Cadastrar(produto5);
+
+            var produto6 = new Produto() { Nome = "Liquidificador Philco", Preco = 1000.90m, Ativo = false, Descricao = "Liquidificador Philco", DataModificacao = DateTime.Now, IdUsuario = userAdmin3.Id };
+            _produtoRepository.Cadastrar(produto6);
+
+            var produto7 = new Produto() { Nome = "Cama Box Baú King", Preco = 1500.00m, Ativo = true, Descricao = "Cama Box Baú King", DataModificacao = DateTime.Now, IdUsuario = userAdmin.Id };
+            _produtoRepository.Cadastrar(produto7);
+
+            var produto8 = new Produto() { Nome = "Colchão King", Preco = 2200.89m, Ativo = true, Descricao = "Colchão King", DataModificacao = DateTime.Now, IdUsuario = userAdmin2.Id };
+            _produtoRepository.Cadastrar(produto8);
+
+            var estoque1 = new Estoque() { IdProduto = produto1.Id, Quantidade = 3, DataModificacao = DateTime.Now };
+            _estoqueRepository.Cadastrar(estoque1);
+
+            var estoque2 = new Estoque() { IdProduto = produto2.Id, Quantidade = 5, DataModificacao = DateTime.Now };
+            _estoqueRepository.Cadastrar(estoque2);
+
+            var estoque3 = new Estoque() { IdProduto = produto3.Id, Quantidade = 20, DataModificacao = DateTime.Now };
+            _estoqueRepository.Cadastrar(estoque3);
+
+            var estoque4 = new Estoque() { IdProduto = produto4.Id, Quantidade = 1, DataModificacao = DateTime.Now };
+            _estoqueRepository.Cadastrar(estoque4);
+
+            var estoque5 = new Estoque() { IdProduto = produto5.Id, Quantidade = 3, DataModificacao = DateTime.Now };
+            _estoqueRepository.Cadastrar(estoque5);
+
+            var estoque6 = new Estoque() { IdProduto = produto6.Id, Quantidade = 22, DataModificacao = DateTime.Now };
+            _estoqueRepository.Cadastrar(estoque6);
+
+            var estoque7 = new Estoque() { IdProduto = produto7.Id, Quantidade = 7, DataModificacao = DateTime.Now };
+            _estoqueRepository.Cadastrar(estoque7);
+
+            var estoque8 = new Estoque() { IdProduto = produto8.Id, Quantidade = 3, DataModificacao = DateTime.Now };
+            _estoqueRepository.Cadastrar(estoque8);
+
             return Created("initial", new
             {
                 Perfis = _perfilRepository.ListarTodos(),
                 Usuarios = _usuarioRepository.ListarTodos(),
-                Produtos = _produtoRepository.ListarTodos()
+                Produtos = _produtoRepository.ListarTodos(),
+                Estoques = _estoqueRepository.ListarTodos()
             });
         }
     }

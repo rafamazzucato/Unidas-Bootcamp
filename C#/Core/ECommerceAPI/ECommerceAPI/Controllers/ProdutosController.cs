@@ -13,14 +13,14 @@ namespace ECommerceAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "ADMIN")]
     public class ProdutosController : ControllerBase
     {
         private readonly ProdutoRepository _produtoRepository;
 
-        public ProdutosController(ECommerceDbContext context)
+        public ProdutosController(ProdutoRepository produtoRepository)
         {
-            _produtoRepository = new ProdutoRepositoryImpl(context);
+            _produtoRepository = produtoRepository;
         }
 
         // GET: api/Produtos

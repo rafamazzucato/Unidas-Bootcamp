@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceAPI.Services
 {
-    public class TokenServico
+    public static class TokenServico
     {
         public static string GenerateToken(Usuario usuario)
         {
@@ -24,7 +24,8 @@ namespace ECommerceAPI.Services
                     new Claim(ClaimTypes.Role, usuario.Perfil.Nome)
                 }),
                 //Expires = DateTime.UtcNow.AddHours(2),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), 
+                SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
