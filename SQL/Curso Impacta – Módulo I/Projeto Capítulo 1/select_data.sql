@@ -1,0 +1,5 @@
+-- Primeira instrução SQl
+/*
+	SELECIONANDO A DATA DO SERVIDOR
+*/
+SELECT GETDATE();

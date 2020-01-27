@@ -67,6 +67,7 @@ namespace ECommerceAPI.Controllers
         {
             produto.Ativo = true;
             produto.DataModificacao = DateTime.Now;
+            produto.IdUsuario = 2;
             _produtoRepository.Cadastrar(produto);
 
             if(produto.Id == 0)

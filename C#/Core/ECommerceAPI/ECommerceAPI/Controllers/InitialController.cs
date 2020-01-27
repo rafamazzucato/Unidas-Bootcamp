@@ -33,6 +33,7 @@ namespace ECommerceAPI.Controllers
         [HttpGet]
         public ActionResult Initiate()
         {
+            /*
             var perfilAdmin = new Perfil() { Nome = "ADMIN" };
             var perfilUser = new Perfil() { Nome = "USER" };
 
@@ -100,6 +101,7 @@ namespace ECommerceAPI.Controllers
 
             var estoque8 = new Estoque() { IdProduto = produto8.Id, Quantidade = 3, DataModificacao = DateTime.Now };
             _estoqueRepository.Cadastrar(estoque8);
+            */
 
             return Created("initial", new
             {
